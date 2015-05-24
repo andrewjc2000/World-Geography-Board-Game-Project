@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>
+                World Geo Board Game
+            </title>
+			<link rel="icon" type="png" href="Resources/globe_icon.png"/>
+			<link rel="stylesheet" type="text/css" href="main.css" />
+			<style>
+				body{
+					background:none;
+					background-color: #E8E8E8;
+				}
+			</style>
+		</head>
+		<body onLoad="Setup.loadGameComponents()">
+			<div id="gameBoard" class="noSelect">
+				<h1 id="playerTurnHeader">
+				</h1>
+			</div>
+			<div id="playerSelectionScreen" class="noSelect">
+				<h1 class="noSelect">
+					Country Selection
+				</h1>
+				<select onChange="Game.showSelects()">
+					<option value="" disabled selected style="display:none;">Number of Players</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+				<div id="startGameButton" onClick="Game.submitPlayers()">
+					<p>
+						Start Game
+					</p>
+				</div>
+			</div>
+			<div id="tileInfoBox" class="noSelect">
+                <div id="closeInfoButton" onClick="Game.closePropertyInfo()">
+                </div>
+				<div id="propertyInfo">
+					<div id="colorBox">
+                        <p>
+                            Title Deed
+                        </p>
+                        <br>
+                        <p>
+                        <!--Multiple paragraphs because of the selectors --> 
+                        </p>
+					</div>
+					<p>
+                    </p>
+				</div>
+				<p id="question">
+				</p>
+				<div id="payRentButton" onClick="Game.payRent()" class="noSelect">
+					Pay Rent
+				</div>
+				<div id="propImage" class="noSelect">
+				</div>
+			</div>
+			
+			<div id="diceThrowingScreen" class="noSelect">
+				<div id="diceAnim">
+				</div>
+				<div id="throwDiceButton" onClick="Game.rollDice()">
+					<p>
+					Roll Dice
+					</p>
+				</div>
+				<div id="diceFace1">
+				</div>
+				<div id="diceFace2">
+				</div>
+			</div>
+			
+			<div id="dataBox" class="noSelect">
+				<div id="actionBar">
+					<div class="action" onClick="Game.openHouseSelection()">
+					</div>
+					<div class="action" onClick="Game.showDiceBox()">
+					</div>
+				</div>
+			</div>
+			
+			<div id="moneyAmountsContain" class="noSelect">
+			</div>
+			
+			<div id="gameBoardMargin" onClick="if(Game.inHouseSelection){Game.closeHouseSelection();}" class="noSelect">
+			</div>
+			<script src="jQuery.js">
+			</script>
+			<script src="GameMechanics.js">
+			</script>
+		</body>
+	</html>

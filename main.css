@@ -1,0 +1,429 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background:url("Resources/world-map.gif") no-repeat fixed;
+    background-size: cover;
+}
+.noSelect {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	cursor:context-menu;
+}
+#mainGameHeader {
+    position:absolute;
+    top:10%;
+    font-size:60px;
+    font-weight:bold;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+    text-shadow: 3px 3px #000000;
+    width:900px;
+    left:calc((100% - 800px) / 2);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#startGameButton {
+	position:absolute;
+	height:100px;
+	width:300px;
+	top:calc((100% - 100px) / 2);
+	left:calc((100% - 300px) / 2);
+	border-radius: 30px;
+	border: 5px solid black;
+	background: linear-gradient(to right, #FF0000 , #880000);
+}
+#startGameButton:hover {
+	position:absolute;
+	height:100px;
+	width:300px;
+	top:calc((100% - 100px) / 2);
+	left:calc((100% - 300px) / 2);
+	border-radius: 30px;
+	border: 5px solid #656565;
+	background: linear-gradient(to right, #FF6565, #886565);
+	cursor: pointer;
+}
+#startGameButton p{
+	position:absolute;
+	text-align:center;
+	font-size:40px;
+	font-family:Courier New;
+	font-weight:bold;
+	color:white;
+	transform: translateY(50%) translateX(12.5%);
+}
+#loadingBox{
+    visibility:hidden;
+    position: absolute;
+    height:300px;
+    width:500px;
+    top:calc((100% - 300px) / 2);
+	left:calc((100% - 500px) / 2);
+    background-color:white;
+    border-radius: 40px;
+    box-shadow: 5px 5px 5px #888888;
+}
+#loadingBox #loadingBoxText{
+    visibility:hidden;
+	position:relative;
+	color:black;
+	width:500px;
+	height:24px;
+	top:calc((100% - 24px) / 2);
+	text-align:center;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:24px;
+}
+#gameBoard {
+	position:absolute;
+	background: url("Resources/monopoly_board.png") no-repeat;
+	background-size:100%;
+	height:100%;
+	top:0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#tileInfoBox {
+	visibility:hidden;
+	position: absolute;
+	height:70%;
+	top:15%;
+	background-color:white;
+	border: 10px solid black;
+	border-radius: 20px;
+	box-shadow: 10px 10px 10px #888888;
+}
+#propertyInfo {
+	position:relative;
+	top:5%;
+	width:40%;
+	height:50%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:white;
+	border: 5px solid black;
+}
+#colorBox{
+	visibility:hidden;
+	width:100%;
+	height:15%;
+	border-bottom: 5px solid black;
+}
+#tileInfoBox p{
+    position:relative;
+    top:50px;
+    left:20px;
+    width:90%;
+    height:25%;
+    word-wrap: break-word;
+	font-family:Arial;
+	font-size:14px;
+	overflow:hidden;
+}
+#propertyInfo p:nth-child(2){
+	position:absolute;
+	top:21%;
+	left:5%;
+	height:100%;
+}
+#closeInfoButton{
+    position:relative;
+    left:calc(100% - 30px);
+    top:0px;
+    height:30px;
+    width:30px;
+    background:url("Resources/xButton.png") no-repeat;
+    background-size: cover;
+}
+#colorBox p:nth-child(1){
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    text-align:center;
+    font-family:Monospace;
+    font-size:14px;
+}
+#colorBox p:nth-child(3){
+    position:absolute;
+    top:18px;
+    left:0px;
+    width:100%;
+    text-align:center;
+    font-family:Monospace;
+    font-size:15px;
+    font-weight:bold;
+}
+#colorBox p:nth-child(4){
+    position:absolute;
+    top:20%;
+    left:5px;
+    height:100%;
+    font-family:Arial;
+    font-size:16px;
+    overflow: none;
+}
+
+#diceThrowingScreen {
+	visibility:hidden;
+	position: absolute;
+	height:50%;
+	top:25%;
+	background-color:white;
+	border: 10px solid black;
+	border-radius: 20px;
+	box-shadow: 10px 10px 10px #888888;
+}
+#diceAnim {
+	visibility:hidden;
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+	height:50%;
+	background:url("Resources/RollingDice.gif") no-repeat;
+    background-size: 100%;
+}
+#throwDiceButton {
+	position:relative;
+	top:calc(20% - 20px);
+	height:30px;
+	width:20%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#BBBBBB;
+	border:1px solid black;
+}
+#throwDiceButton:hover {
+	cursor: pointer;
+}
+#throwDiceButton p {
+	text-align:center;
+	font-family:Arial;
+	font-size:20px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+#diceFace1{
+	visibility:hidden;
+	position:relative;
+	right:70px;
+	bottom:calc(45% - 50px);
+	visibility:hidden;
+	margin-left:auto;
+	margin-right:auto;
+	width:50px;
+	height:50px;
+}
+#diceFace2{
+	visibility:hidden;
+	position:relative;
+	left:70px;
+	bottom:45%;
+	visibility:hidden;
+	margin-left:auto;
+	margin-right:auto;
+	width:50px;
+	height:50px;
+}
+#playerSelectionScreen {
+	visibility:visible;
+	position: absolute;
+	height:70%;
+	top:15%;
+	background-color:white;
+	border: 10px solid black;
+	border-radius: 20px;
+	box-shadow: 10px 10px 10px #888888;
+}
+#playerSelectionScreen h1:nth-child(1){
+	position:relative;
+	top:10%;
+	font-size:30px;
+	text-align:center;
+	font-family:Arial;
+	font-weight:bold;
+}
+#playerSelectionScreen select:nth-child(2){
+	position:absolute;
+	font-size:18px;
+	top:20%;
+	left:calc(50% - 90px);
+}
+#playerSelectionScreen .selectOption{
+    position:absolute;
+    left:20%;
+}
+#playerSelectionScreen p{
+    position:absolute;
+    left:5%;
+}
+
+#playerSelectionScreen #startGameButton {
+	visibility:hidden;
+	position:absolute;
+	height:100px;
+	width:300px;
+	top:calc(95% - 100px);
+	left:calc((100% - 300px) / 2);
+	border-radius: 30px;
+	border: 5px solid black;
+	background: linear-gradient(to right, #FF0000 , #880000);
+}
+#playerSelectionScreen #startGameButton:hover {
+	position:absolute;
+	height:100px;
+	width:300px;
+	top:calc(95% - 100px);
+	left:calc((100% - 300px) / 2);
+	border-radius: 30px;
+	border: 5px solid #656565;
+	background: linear-gradient(to right, #FF6565, #886565);
+	cursor: pointer;
+}
+#playerSelectionScreen #startGameButton p{
+	position:absolute;
+	text-align:center;
+	font-size:40px;
+	font-family:Courier New;
+	font-weight:bold;
+	color:white;
+	transform: translateY(50%) translateX(12.5%);
+}
+.player {
+	position:absolute;
+	width:7%;
+	height:6%;
+	left:87%;
+	top:90%;
+}
+#playerTurnHeader {
+	position:absolute;
+	top:calc(50% - 32px);
+	z-index: 10;
+	width:50%;
+	left:25%;
+	text-align:center;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:32px;
+	color:black;
+	background-color:white;
+}
+#dataBox {
+	visibility:hidden;
+	position: absolute;
+	height:70%;
+	top:15%;
+	background-color:white;
+	border: 10px solid black;
+	border-radius: 20px;
+	box-shadow: 10px 10px 10px #888888;
+}
+#dataBox #actionBar{
+	left:5%;
+	position:absolute;
+	top:40%;
+	width:100%;
+	height:50px;
+}
+.action{
+	border: 2px solid black;
+	margin-bottom: 25px;
+	width:50px;
+	height:50px;
+}
+.action:nth-child(1){
+	background: url('Resources/MonopolyHouse.jpg') no-repeat;
+	background-size:100%;
+}
+/**
+.action:nth-child(2){
+	background: url('Resources/MortgageProperties.png') no-repeat;
+	background-size:100%;
+}
+**/
+.action:nth-child(2){
+	background: url('Resources/DiceFace5.jpg') no-repeat;
+	background-size:100%;
+}
+#moneyAmountsContain {
+	visibility:hidden;
+	position:absolute;
+	left: calc(80% - 6px);
+	width:20%;
+	height:40%;
+	background-color:white;
+	border:2px solid black;
+}
+#moneyAmountsContain p{
+	font-size:16px;
+	margin-bottom:5px;
+	font-family:Arial;
+	font-weight:bold;
+	height:16px;
+}
+#payRentButton {
+	visibility:hidden;
+	position:absolute;
+	left: 25%;
+	top:80%;
+	height:40px;
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#BBBBBB;
+	border:1px solid black;
+	text-align:center;
+	font-family:Arial;
+	font-size:40px;
+}
+#propImage{
+	visibility:hidden;
+	position:absolute;
+	left:30%;
+	top:10%;
+	width:40%;
+	height:40%;
+	border: 5px solid black;
+}
+.House {
+	visibility:hidden;
+	position:absolute;
+	width:2.5%;
+	height:2.5%;
+	background: url('Resources/House.jpg') no-repeat;
+	background-size: 100%;
+}
+.Hotel {
+	visibility:hidden;
+	position:absolute;
+	width:2.5%;
+	height:2.5%;
+	background: url('Resources/Hotel.jpg') no-repeat;
+	background-size: 100%;
+}
+#gameBoardMargin {
+	position:absolute;
+	width:5%;
+	height:calc(100% - 3px);
+	left:1px;
+	top:1px;
+	background-color:white;
+	opacity:75%;
+	border: 1px solid black;
+	font-size: calc(200%);
+	font-family: Monospace;
+	font-weight: bold;
+	word-wrap: break-word;
+}
+#question {
+	position:relative;
+	bottom:20%;
+}

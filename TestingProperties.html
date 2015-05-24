@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<style>
+				#tileInfoBox {
+					visibility:visible;
+					position: absolute;
+					height:90%;
+					width:45%;
+					top:5%;
+					background-color:white;
+					border: 10px solid black;
+					border-radius: 20px;
+					box-shadow: 10px 10px 10px #888888;
+				}
+				#propertyInfo {
+					position:relative;
+					top:5%;
+					width:40%;
+					height:50%;
+					margin-left:auto;
+					margin-right:auto;
+					background-color:white;
+					border: 5px solid black;
+				}
+				#colorBox{
+					visibility:visible;
+					width:100%;
+					height:15%;
+					border-bottom: 5px solid black;
+					background-color:green;
+				}
+				#tileInfoBox p{
+					position:relative;
+					top:50px;
+					left:20px;
+					width:90%;
+					height:18%;
+					word-wrap: break-word;
+					font-family:Arial;
+					font-size:18px;
+					overflow:hidden;
+				}
+				#propertyInfo p:nth-child(2){
+					height:100%;
+				}
+				#closeInfoButton{
+					position:relative;
+					left:calc(100% - 30px);
+					top:0px;
+					height:30px;
+					width:30px;
+					background:url("Resources/xButton.png") no-repeat;
+					background-size: cover;
+				}
+				#colorBox p:nth-child(1){
+					position:absolute;
+					top:0px;
+					left:0px;
+					width:100%;
+					text-align:center;
+					font-family:Monospace;
+					font-size:16px;
+				}
+				#colorBox p:nth-child(3){
+					position:absolute;
+					top:18px;
+					left:0px;
+					width:100%;
+					text-align:center;
+					font-family:Monospace;
+					font-size:20px;
+					font-weight:bold;
+				}
+				#colorBox p:nth-child(4){
+					position:absolute;
+					top:20%;
+					left:5px;
+					height:100%;
+					font-family:Arial;
+					font-size:16px;
+					overflow: none;
+				}
+			</style>
+		</head>
+		<body>
+			<div id="tileInfoBox" class="noSelect">
+                <div id="closeInfoButton" onClick="Game.closePropertyInfo()">
+                </div>
+				<div id="propertyInfo">
+					<div id="colorBox">
+                        <p>
+                            Title Deed
+                        </p>
+                        <br>
+                        <p>
+                        <!--Multiple paragraphs because of the selectors --> 
+                        </p>
+					</div>
+					<p>
+                    </p>
+				</div>
+				<p>
+				</p>
+			</div>
+			<script src="jQuery.js">
+			</script>
+			<script src="GameMechanics.js">
+			</script>
+			<script>
+				$('#propertyInfo p:nth-child(2)').html(
+            "<center>RENT $" + (Data.propertyValues[1] / 10) + "<br> With 1 House " + "&emsp;&emsp;&emsp;" +                     "$" + (Data.propertyValues[1] / 2 - 10) + ".<br> With 2 Houses " + "&emsp;&emsp;&emsp;" +
+              ((Data.propertyValues[1] / 2 - 10) * 3) + ".<br>With 3 Houses" + "&emsp;&emsp;&emsp;" + 
+              ((Data.propertyValues[1] / 2 - 10) * 5) + ".<br>With 4 Houses" + "&emsp;&emsp;&emsp;" + 
+              ((Data.propertyValues[1] / 2 - 10) * 7 + 200) + ".<br> With HOTEL $" + 
+              ((Data.propertyValues[1] / 2 - 10) * 5 + 600) + ".<br> Mortgage Value $" +  
+              (Data.propertyValues[1] / 2) + ".<br> Houses cost $" + 50 + ". each<br>" +
+              "Hotels, $" + 50 + ". plus 4 houses" + "<br><br><div style=font-size:10px;>If a player owns all properties of a color group, the rent for each of those properties, without a house, is doubled.</div>" +
+                "</center>"
+            );
+			</script>
+		</body>
+	</html>
