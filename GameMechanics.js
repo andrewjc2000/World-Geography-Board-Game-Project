@@ -1151,11 +1151,13 @@ var Game = {
 			else if(loc >= 32 && loc <= 40){
 				if(spaces + loc > 41){
 					if(spaces + loc > 51){
-						var moveLeft;
-						moveLeft = Util.pxToNum($("#Prop" + ((spaces + loc) - 40).toString()).css('left'));
-						$("#PlayerNum" + (playerNum + 1).toString()).animate({left:Math.round(Game.boardWidth * 0.93)}, 1500);
+						var moveUp;
+						moveUp = Util.pxToNum($("#Prop" + ((spaces + loc) - 40).toString()).css('down'));
 						$("#PlayerNum" + (playerNum + 1).toString()).animate({top:Math.round(Game.boardWidth * 0.9)}, 1500);
-						$("#PlayerNum" + (playerNum + 1).toString()).animate({left:moveLeft}, 1500);
+						$("#PlayerNum" + (playerNum + 1).toString()).animate({left:0}, 1500);
+						$("#PlayerNum" + (playerNum + 1).toString()).animate({top:moveUp}, 1500,
+							function(){Game.openPropertyInfo(true, Game.playerLocations[playerNum]);}
+						);
 						Game.changePlayerMoney(Game.currentPlayerTurn, 200);
 					}
 					else{
