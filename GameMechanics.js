@@ -708,10 +708,10 @@ var Game = {
 				$("#throwDiceButton p").html('Stop Dice');
 				break;
 			case 2:
-				//var dice1 = Util.randInt(1, 6);
-				//var dice2 = Util.randInt(1, 6);
-				var dice1 = 1;
-				var dice2 = 2;
+				var dice1 = Util.randInt(1, 6);
+				var dice2 = Util.randInt(1, 6);
+				//var dice1 = 1;
+				//var dice2 = 2;
 				Game.currentDice[0] = dice1;
 				Game.currentDice[1] = dice2;
 				if(dice1 === dice2){
