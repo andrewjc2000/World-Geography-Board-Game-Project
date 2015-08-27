@@ -227,6 +227,11 @@ var Game = {
 			Game.closePropertyInfo();
 			Game.showDataBox(1);
 		}
+		else if(landedOn && Game.mortgagedProperties[propertyNum]){
+			alert("This property is currently mortgaged, and you do not own it.");
+			Game.closePropertyInfo();
+			Game.showDataBox(1);
+		}
 		else if(landedOn && Data.propertyColors[propertyNum] !== null && Game.propertyOwners[propertyNum] !== 0
 			&& Game.propertyOwners[propertyNum] !== (Game.currentPlayerTurn + 1)
 		){
@@ -703,10 +708,10 @@ var Game = {
 				$("#throwDiceButton p").html('Stop Dice');
 				break;
 			case 2:
-				var dice1 = Util.randInt(1, 6);
-				var dice2 = Util.randInt(1, 6);
-				//var dice1 = 2;
-				//var dice2 = 2;
+				//var dice1 = Util.randInt(1, 6);
+				//var dice2 = Util.randInt(1, 6);
+				var dice1 = 1;
+				var dice2 = 2;
 				Game.currentDice[0] = dice1;
 				Game.currentDice[1] = dice2;
 				if(dice1 === dice2){
@@ -824,6 +829,17 @@ var Game = {
 				Game.showDataBox(0);
 			}, 2000
 		);
+	},
+	inMortgageState: false,
+	openMortgaging: function(){
+		$("#gameBoardMargin").html("Exit Mortgaging");
+		$("#dataBox").css('visibility', 'hidden');
+		Game.inMortgageState = true;
+	},
+	closeMortgaging: function(){
+		$("#gameBoardMargin").html("");
+		$("#dataBox").css('visibility', 'visible');
+		Game.inMortgageState = false;
 	},
 	inHouseSelection: false,
 	openHouseSelection: function(){
@@ -963,6 +979,42 @@ var Game = {
 		else if(Game.inHouseSelection){
 			Game.buyHouse(propertyNum);
 		}
+		else if(Game.inMortgageState){
+			Game.mortgage(propertyNum);
+		}
+	},
+	mortgage: function(propertyNum){
+		propertyNum--;
+		if(Game.propertyOwners[propertyNum] === Game.currentPlayerTurn + 1){
+			if(!Game.mortgagedProperties[propertyNum]){
+				var cost = Math.round(Data.propertyValues[propertyNum] / 2);
+				var alertMsg = "Are you sure that you want to mortgage this property?  You will get ";
+				alertMsg += "\n$" + cost;
+				alertMsg += ", which is half of this property's value."
+				if(confirm(alertMsg)){
+					Game.changePlayerMoney(Game.currentPlayerTurn, cost);
+					Game.mortgagedProperties[propertyNum] = true;
+					propertyNum++;
+					$("#Prop" + propertyNum).css({ opacity: 0.4 });
+				}
+			}
+			else{
+				var cost = Math.round(1.1 * (Data.propertyValues[propertyNum] / 2));
+				var alertMsg = "Are you sure that you want to un-mortgage this property for a cost of ";
+				alertMsg += "$" + cost + "?";
+				if(confirm(alertMsg)){
+					if(Game.playerMoney[Game.currentPlayerTurn] - cost <= 0){
+						alert("You can't un-mortgage this property!  You'll go bankrupt!");
+					}
+					else{
+						Game.changePlayerMoney(Game.currentPlayerTurn, -1 * cost);
+						Game.mortgagedProperties[propertyNum] = false;
+						propertyNum++;
+						$("#Prop" + propertyNum).css({ opacity: 0.0 });
+					}
+				}
+			}
+		}
 	},
 	closeHouseSelection: function(){
 		$("#gameBoardMargin").html("");
@@ -973,22 +1025,22 @@ var Game = {
 		if(endTurn === 0){
 			$("#dataBox").css('visibility', 'visible');
 			$("#playerTurnHeader").css('visibility', 'hidden');
-			$(".action:nth-child(2)").css('background', 'url(Resources/DiceFace5.jpg) no-repeat');
-			$(".action:nth-child(2)").css('background-size', '100%');
-			$(".action:nth-child(2)").attr('onClick', 'Game.showDiceBox()');
+			$(".action:nth-child(3)").css('background', 'url(Resources/DiceFace5.jpg) no-repeat');
+			$(".action:nth-child(3)").css('background-size', '100%');
+			$(".action:nth-child(3)").attr('onClick', 'Game.showDiceBox()');
 			$("#throwDiceButton p").html('Roll Dice');
 		}
 		else if(endTurn === 1){
 			$("#dataBox").css('visibility', 'visible');
-			$(".action:nth-child(2)").css("background", "url(Resources/EndTurn.png) no-repeat");
-			$(".action:nth-child(2)").css('background-size', '100%');
-			$(".action:nth-child(2)").attr('onClick', 'Game.endPlayerTurn();');
+			$(".action:nth-child(3)").css("background", "url(Resources/EndTurn.png) no-repeat");
+			$(".action:nth-child(3)").css('background-size', '100%');
+			$(".action:nth-child(3)").attr('onClick', 'Game.endPlayerTurn();');
 		}
 		else if(endTurn === 2){
 			$("#dataBox").css('visibility', 'visible');
-			$(".action:nth-child(2)").css("background", "url(Resources/EndTurn.png) no-repeat");
-			$(".action:nth-child(2)").css('background-size', '100%');
-			$(".action:nth-child(2)").attr('onClick', 
+			$(".action:nth-child(3)").css("background", "url(Resources/EndTurn.png) no-repeat");
+			$(".action:nth-child(3)").css('background-size', '100%');
+			$(".action:nth-child(3)").attr('onClick', 
 			'if(Game.playerMoney[Game.currentPlayerTurn] < 0){Game.destroyPlayer(Game.currentPlayerTurn)}else{Game.endPlayerTurn();}'
 			);
 		}
@@ -1274,8 +1326,7 @@ var Setup = {
 		
 		for(var i = 0;i < 9;i++){
 			var clickBox = document.createElement("div");
-			$(clickBox).css('position', 'absolute');
-			$(clickBox).css('visibility', 'visible');
+			$(clickBox).attr('class', 'Property');
 			$(clickBox).css('left', Game.boardWidth * (.14054216867 + (i * .0803253012)) + "px");
 			$(clickBox).css('width', .0783253012 * Game.boardWidth + "px");
 			$(clickBox).css('height', .13054216867 * Game.boardWidth + "px");
@@ -1297,8 +1348,7 @@ var Setup = {
 		
 		for(var i = 0;i < 9;i++){
 			var clickBox = document.createElement("div");
-			$(clickBox).css('position', 'absolute');
-			$(clickBox).css('visibility', 'visible');
+			$(clickBox).attr('class', 'Property');
 			$(clickBox).css('left', "0px");
 			$(clickBox).css('width', .13454216867 * Game.boardWidth + "px");
 			$(clickBox).css('height', .0783253012 * Game.boardWidth + "px");
@@ -1320,8 +1370,7 @@ var Setup = {
 		
 		for(var i = 0;i < 9;i++){
 			var clickBox = document.createElement("div");
-			$(clickBox).css('position', 'absolute');
-			$(clickBox).css('visibility', 'visible');
+			$(clickBox).attr('class', 'Property');
 			$(clickBox).css('left', Game.boardWidth * (.14054216867 + (i * .0803253012)) + "px");
 			$(clickBox).css('width', .0783253012 * Game.boardWidth + "px");
 			$(clickBox).css('height', .13054216867 * Game.boardWidth + "px");
@@ -1343,8 +1392,7 @@ var Setup = {
 		
 		for(var i = 0;i < 9;i++){
 			var clickBox = document.createElement("div");
-			$(clickBox).css('position', 'absolute');
-			$(clickBox).css('visibility', 'visible');
+			$(clickBox).attr('class', 'Property');
 			$(clickBox).css('left', ((1 - .13454216867) * Game.boardWidth) + "px");
 			$(clickBox).css('width', .13454216867 * Game.boardWidth + "px");
 			$(clickBox).css('height', .0783253012 * Game.boardWidth + "px");

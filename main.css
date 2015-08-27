@@ -127,6 +127,14 @@ body {
 	font-size:14px;
 	overflow:hidden;
 }
+
+.Property{
+	position: absolute;
+	visibility: visible;
+	background-color: #FF0000;
+	opacity: 0.0;
+}
+
 #propertyInfo p:nth-child(2){
 	position:absolute;
 	top:21%;
@@ -343,13 +351,11 @@ body {
 	background: url('Resources/MonopolyHouse.jpg') no-repeat;
 	background-size:100%;
 }
-/**
 .action:nth-child(2){
 	background: url('Resources/MortgageProperties.png') no-repeat;
 	background-size:100%;
 }
-**/
-.action:nth-child(2){
+.action:nth-child(3){
 	background: url('Resources/DiceFace5.jpg') no-repeat;
 	background-size:100%;
 }
